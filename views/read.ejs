@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/read.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Mangacy: Baca Komik</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="headbar">
+        <p class="chapter">Chapter <%= chapter %></p>
+        <div class="btnc1">
+            <p class="chapter_title"><%= title %></p>
+
+            <div class="btnc">
+              <button class="previous <%= previous %>" data-chapter="<%= chapter %>" data-name="<%= title %>"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+              <button class="next <%= next %>" data-chapter="<%= chapter %>" data-name="<%= title %>">Next <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="imageContainer">
+        <% imageData.forEach(ch => { %>
+            <img src="<%= baseURL %>/data/<%= hash %>/<%= ch %>" alt="">
+        <% }) %>
+    </div>
+    <div class="headbar downbar">
+        <p class="chapter">Chapter <%= chapter %></p>
+        <div class="btnc">
+            <button class="previous <%= previous %>" data-chapter="<%= chapter %>" data-name="<%= title %>"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+            <button class="next <%= next %>" data-chapter="<%= chapter %>" data-name="<%= title %>">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    </div>
+
+    <script>
+    const button = document.querySelectorAll("button")
+      button.forEach(np => {
+        np.addEventListener("click", event => {
+          if(event.target.classList.contains("next") && !event.target.classList.contains("false")){
+            window.open(`/manga/next/${event.currentTarget.dataset.chapter}/${event.currentTarget.dataset.name}`, "_self")
+          }
+
+          if(event.target.classList.contains("previous") && !event.target.classList.contains("false")){
+            window.open(`/manga/prev/${event.currentTarget.dataset.chapter}/${event.currentTarget.dataset.name}`, "_self")
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

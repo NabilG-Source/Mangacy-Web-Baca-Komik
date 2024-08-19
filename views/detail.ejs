@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Mangacy: Baca Komik</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="manga_detail_container">
+        <div class="manga_header">
+          <img
+            src="<%= manga[0].poster %>"
+            alt=""
+            class="manga_poster"
+            width="150px"
+            height="200px"
+          />
+          <div class="desk_text">
+            <p class="manga_title"><%= manga[0].title %> </p>
+            <p class="manga_desk">
+              <%= manga[0].desk %>
+            </p>
+            <div class="genre">
+             <% manga[0].genre.forEach(gen => { %>
+                <p class="genre_list"><%= gen %></p>
+             <% }) %>
+            </div>
+            <div class="manga_rs">
+                <p class="manga_rs_txt">
+                  <i
+                    class="fa-solid fa-circle fa-beat"
+                    style="color: #36c502"
+                  ></i>
+                  PUBLICATION: <%= manga[0].year %>, <%= manga[0].status %>
+                </p>
+              </div>
+          </div>
+        </div>
+        <div class="manga_body">
+            <p style="font-weight: 700;">Chapter <%= manga[0].title %></p>
+            <div class="chapter_list">
+               <% manga[0].chapterInfo.forEach(data => { %>
+                <div class="chapter_body" data-number="<%= data.chapter %>" data-name="<%= manga[0].title %>" data-chapter="<%= data.chapterID %>">
+                  <div class="text_1" style="width: 50%;">
+                      <h4 style="display: flex; align-items: center; margin-bottom: 1%;"><img style="margin-right: 1%;" src="/images/<%= data.translate %>" width="20px" alt="">Chapter <%= data.chapter %></h4>
+                      <h4 style="display: flex; align-items: center; "><i class="fa-solid fa-user-group" style="font-size: 16px; margin-right: 1%; color: rgb(255,103,64);"></i><%= data.group[0] %></h4>
+                  </div>
+                  <h4><i class="fa-regular fa-clock" style="color: rgb(255,103,64);"></i> <%= data.time %></h4>
+              </div>
+               <% }) %>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const chapterList = document.querySelectorAll(".chapter_body");
+      chapterList.forEach(cbody => {
+        cbody.addEventListener("click", event => {
+          window.open(`/manga/read/${event.currentTarget.dataset.chapter}/${event.currentTarget.dataset.number}/${event.currentTarget.dataset.name}`, "_blank")
+        })
+      })
+
+      
+    </script>
+  </body>
+</html>

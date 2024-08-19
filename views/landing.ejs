@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Mangacy: Baca Komik</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li class="center"><a href="#"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="upward"><a href="#"><i class="fa-solid fa-fire"></i> Popular</a></li>
+            <li class="forward"><a href="#"><i class="fa-solid fa-list-ul"></i> Daftar Komik</a></li>
+            <li class="forward"><a href="#"><i class="fa-solid fa-book-bookmark"></i> Bookmark</a></li>
+          </ul>
+          <div class="searchbar">
+            <input type="text" name="inputManga" id="inputManga">
+            <button class="btn-search">Search</button>
+          </div>
+    </nav>
+   <div class="container">
+    <div class="manga-ctr">
+        <h1 class="hot_title"><%- header %></h1>
+        <hr>
+        <div class="manga-container">
+         <% manga.forEach(info => { %>
+             <div class="manga" data-manga="<%= info.title %>">
+                 <div class="manga_image" >
+                    <img src="<%= info.poster %>" width="160px" height="220px" alt="">
+                    
+                </div>
+                 <p class="manga_header" data-manga="<%= info.title %>"><i class="fa-solid fa-burst" style="color: #db321f;"></i> <%= info.titleName %></p>
+                 <p class="manga_chapter"><i class="fa-solid fa-pager" style="color: #2c66c9;"></i> Chapter <%= info.dataTM %></p>
+                 <p class="manga_type"><%= info.type %></p>
+                 <!-- <div class="manga_tag">
+                     <p class="manga_type"><%= info.type %></p>
+                     <p class="manga_status"><%= info.status %></p>
+                 </div> -->
+                 <!-- <p><img src="/images/book.png" width="20px" height="20px" alt="">Sinopsis</p> -->
+                 <!-- <div class="manga_sinopsis">
+                     <p class="s_body"><%= info.desk %></p>
+                 </div>
+                 <button class="btn-detail">Detail <img src="/images/detail.png" width="16px" height="16px" alt="detail"></button> -->
+             </div>
+         <% }) %>
+         
+     </div>
+    </div>
+   </div>
+
+   <script>
+    const titleName = document.querySelector("#inputManga");
+    document.querySelector(".btn-search").addEventListener("click", () => {
+        if(titleName.value.length != 0) window.location.href = `/manga/search/?title=${titleName.value}`;
+        else window.location.href = "/"
+    })
+
+    document.querySelector(".manga-container").addEventListener("click", (e) => {
+        if(e.target.classList.contains("manga")){
+           window.location.href = `/manga/detail/?title=${e.target.dataset.manga}`
+        }
+    });
+
+    const mangaDIV = document.querySelectorAll(".manga_header");
+    mangaDIV.forEach(el => {
+        el.addEventListener("click", (e) => {
+            window.location.href = `/manga/detail/?title=${e.target.dataset.manga}`
+        })
+    })
+   </script>
+</body>
+</html>

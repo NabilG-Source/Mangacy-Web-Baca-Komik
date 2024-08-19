@@ -1,0 +1,12 @@
+MangaDex API:
+- API Bagian untuk search manga:
+https://api.mangadex.org/manga?title=sss
+
+- API Bagian untuk mendapatkan attribute relationships manga:
+https://api.mangadex.org/cover/365d6442-61da-4106-bd66-4620a004d967
+
+- API Bagian untuk mendapatkan poster manga:
+https://uploads.mangadex.org/covers/22ea5bf5-3b51-4f03-b22d-1a5917a7c6a6/80a9741c-3bea-4380-85d5-a1424a4ebd5e.jpg
+
+- API Bagian untuk mendapatkan attribute chapter:
+https://api.mangadex.org/manga/10b4c1bb-f6bd-4dd7-a0aa-c895ad8c840d/feed
